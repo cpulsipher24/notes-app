@@ -1,26 +1,40 @@
-const express = require('express');
 const fs = require('fs');
 const path = require('path');
-const htmlRoutes = require('./routes/htmlRoutes');
-const apiRoutes = require('./routes/apiRoutes');
+const { v4: uuidv4 } = require('uuid');
+const router = require('express').Router();
 
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middleware to parse JSON and URL-encoded data
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// Serve static files (CSS, client-side JS, etc.)
-app.use(express.static('public'));
-
-// Use HTML routes
-app.use('/', htmlRoutes);
-
-// Use API routes
-app.use('/', apiRoutes);
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is listening on http://localhost:${PORT}`);
+// Read notes from db.json
+router.get('/api/notes', (req, res) => {
+  const notes = JSON.parse(fs.readFileSync(path.join(__dirname, '../db.json'), 'utf-8'));
+  res.json(notes);
 });
+
+// Save a new note to db.json
+router.post('/api/notes', (req, res) => {
+  const newNote = req.body;
+  newNote.id = uuidv4(); // Add unique ID using the uuid package
+
+  const notes = JSON.parse(fs.readFileSync(path.join(__dirname, '../db.json'), 'utf-8'));
+  notes.push(newNote);
+
+  fs.writeFileSync(path.join(__dirname, '../db.json'), JSON.stringify(notes, null, 2));
+  
+  res.json(newNote);
+});
+
+// Delete a note from db.json
+router.delete('/api/notes/:id', (req, res) => {
+  const noteId = req.params.id;
+
+  let notes = JSON.parse(fs.readFileSync(path.join(__dirname, '../db.json'), 'utf-8'));
+
+  // Filter out the note with the given ID
+  notes = notes.filter((note) => note.id !== noteId);
+
+  // Save the updated notes array to db.json
+  fs.writeFileSync(path.join(__dirname, '../db.json'), JSON.stringify(notes, null, 2));
+
+  res.json({ message: 'Note deleted successfully' });
+});
+
+module.exports = router;
