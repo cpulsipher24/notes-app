@@ -20,6 +20,12 @@ Repository Link: https://github.com/cpulsipher24/notes-app
     
 ## Usage
 This app should be used to make and save helpful notes for every day life.
+
+## Link to Deployed Website
+https://golly-notes-app-a8c4cee9ac74.herokuapp.com/notes
+
+## Screenshot
+![Screenshot](./Images/screenshot.jpg)
     
 ## Contributing
 This project is open to collaboration. If you want to contribute, fork the repository and feel free to add code and create a pull request for review. 
