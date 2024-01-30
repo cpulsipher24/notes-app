@@ -7,5 +7,10 @@
     "title": "To Do List",
     "text": "Go to store. ",
     "id": "36707ef9-fd3e-4cc3-aeea-a822221958f3"
+  },
+  {
+    "title": "Grocery List",
+    "text": "-Apples\n-Oranges\n-Potatoes",
+    "id": "089c9d72-68da-4539-8553-22d1564a794e"
   }
 ]
