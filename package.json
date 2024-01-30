@@ -1,6 +1,26 @@
 {
+  "name": "your-app-name",
+  "version": "1.0.0",
+  "description": "Your app description",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.18.2",
     "uuid": "^9.0.1"
-  }
+  },
+  "engines": {
+    "node": "14.x" // Specify the Node.js version your app is compatible with
+  },
+  "repository": {
+    "type": "git",
+    "url": "your-git-repository-url"
+  },
+  "keywords": [
+    "express",
+    "heroku"
+    // Add relevant keywords
+  ],
+  "license": "ISC"
 }
